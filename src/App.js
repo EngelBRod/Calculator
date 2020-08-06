@@ -100,67 +100,83 @@ class App extends Component {
   render(){
     return (
       <div className="App">
-        <Display
-        DisplayScreen={this.state.screen}
-        DisplayResult={this.state.currentNumber}
-        />
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <Display
+                  DisplayScreen={this.state.screen}
+                  DisplayResult={this.state.currentNumber}
+              />
+
+            </div>
+          </div>
+          <div class="row">
+            
+              
         
-        <Key 
-        Character={1}
-        CharacterToScreen={this.displayScreen}
-        />
-        <Key 
-        Character={2}
-        CharacterToScreen={this.displayScreen}
-        />
-        <Key 
-        Character={3}
-        CharacterToScreen={this.displayScreen}
-        />
-        <Key 
-        Character={4}
-        CharacterToScreen={this.displayScreen}
-        />
-        <Key 
-        Character={5}
-        CharacterToScreen={this.displayScreen}
-        />
-        <Key 
-        Character={6}
-        CharacterToScreen={this.displayScreen}
-        />
-        <Key 
-        Character={7}
-        CharacterToScreen={this.displayScreen}
-        />
-        <Key 
-        Character={8}
-        CharacterToScreen={this.displayScreen}
-        />
-        <Key 
-        Character={9}
-        CharacterToScreen={this.displayScreen}
-        />
-        <Key 
-        Character={0}
-        CharacterToScreen={this.displayScreen}
-        />
-        <Key 
-        Character={'+'}
-        CharacterToScreen={this.displayScreen}
-        />
-         <Key 
-        Character={'-'}
-        CharacterToScreen={this.displayScreen}
-        />
-        <Key 
-        Character={'*'}
-        CharacterToScreen={this.displayScreen}
-        />
-        <Key 
-        Character={'/'}
-        CharacterToScreen={this.displayScreen}
-        />
+              <Key 
+              Character={1}
+              CharacterToScreen={this.displayScreen}
+              />
+              <Key 
+              Character={2}
+              CharacterToScreen={this.displayScreen}
+              />
+              <Key 
+              Character={3}
+              CharacterToScreen={this.displayScreen}
+              />
+              <Key 
+              Character={4}
+              CharacterToScreen={this.displayScreen}
+              />
+              <Key 
+              Character={5}
+              CharacterToScreen={this.displayScreen}
+              />
+              <Key 
+              Character={6}
+              CharacterToScreen={this.displayScreen}
+              />
+              <Key 
+              Character={7}
+              CharacterToScreen={this.displayScreen}
+              />
+              <Key 
+              Character={8}
+              CharacterToScreen={this.displayScreen}
+              />
+              <Key 
+              Character={9}
+              CharacterToScreen={this.displayScreen}
+              />
+              <Key 
+              Character={0}
+              CharacterToScreen={this.displayScreen}
+              />
+              <Key 
+              Character={'+'}
+              CharacterToScreen={this.displayScreen}
+              />
+              <Key 
+              Character={'-'}
+              CharacterToScreen={this.displayScreen}
+              />
+              <Key 
+              Character={'*'}
+              CharacterToScreen={this.displayScreen}
+              />
+              <Key 
+              Character={'/'}
+              CharacterToScreen={this.displayScreen}
+              />
+
+            
+
+          </div>
+
+        </div>
+        
       </div>
     );
   }

@@ -12,7 +12,7 @@ onClickHandler(Character,CharacterToScreen){
 
 render(){
     return(
-        <button onClick={()=>this.onClickHandler(this.props.Character,this.props.CharacterToScreen)}>{this.props.Character}</button>
+        <button class="col-4" onClick={()=>this.onClickHandler(this.props.Character,this.props.CharacterToScreen)}>{this.props.Character}</button>
     );
 }
 
