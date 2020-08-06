@@ -9,8 +9,10 @@ class App extends Component {
     state = {
       screen:'',
       currentNumber:'0',
+      currentOperation:'',
       result:0,
-      setToWrite:true
+      setToWrite:true,
+      setToOperate:true
     }
   
   
@@ -23,39 +25,54 @@ class App extends Component {
    
 
     if(value==='+' || value==='-' || value==='*' || value==='/'){
-      tempScreen=[...this.state.currentNumber]
-      tempScreen= tempScreen.concat( value.toString());
-      tempScreen= tempScreen.concat(this.state.screen);
-      tempScreen=tempScreen.join('');
-      console.log(tempScreen)
-      this.setState({screen:tempScreen})
-      switch(value){
-        
-        case '+':
-          tempResult=  parseInt(this.state.currentNumber) + this.state.result;
-          break;
-         // return tempResult;
-        case '-':
-          tempResult=  parseInt(this.state.currentNumber) - this.state.result;
-          break;
-        case '*':
-          tempResult=  parseInt(this.state.currentNumber) * this.state.result;
-          break;
-        case '/':
-          tempResult=  parseInt(this.state.currentNumber) / this.state.result;
-          break;
-        default:
-          break
+     
+      if( this.state.setToOperate){
+        let currentOperator=this.state.currentOperation;
+        tempScreen=[...this.state.currentNumber]
+        tempScreen= tempScreen.concat( value.toString());
+        tempScreen= tempScreen.concat(this.state.screen);
+        tempScreen=tempScreen.join('');
+        console.log(tempScreen)
+        this.setState({screen:tempScreen})
+        console.log('set:'+this.state.setToOperate);
 
-          
+        switch(currentOperator){
+        
+          case '+':
+            tempResult=  this.state.result + parseInt(this.state.currentNumber)  ;
+            this.setState({setToOperate:false});
+            break;
+           // return tempResult;
+          case '-':
+            tempResult=  this.state.result - parseInt(this.state.currentNumber)  ;
+            this.setState({setToOperate:false});
+            break;
+          case '*':
+            tempResult=  this.state.result * (this.state.currentNumber)  ;
+            this.setState({setToOperate:false});
+            break;
+          case '/':
+            tempResult= this.state.result / parseInt(this.state.currentNumber);
+            this.setState({setToOperate:false});
+            break;
+          default:
+            tempResult=parseInt(this.state.currentNumber);
+            break
+            
+        }
+        
+        console.log(tempResult+'temp')
+        this.setState({result:tempResult})
+        tempResult=tempResult.toString()
+        this.setState({currentNumber:tempResult});
+        setToWrite=true;
+        this.setState({setToWrite})
+
       }
+      this.setState({currentOperation:value.toString()})
+      
     
-      console.log(tempResult+'temp')
-      this.setState({result:tempResult})
-      tempResult=tempResult.toString()
-      this.setState({currentNumber:tempResult});
-      setToWrite=true;
-      this.setState({setToWrite})
+     
 
     }
     else{
@@ -63,7 +80,8 @@ class App extends Component {
       if(setToWrite){
         tempScreen=value.toString();
         setToWrite=false;
-        this.setState({setToWrite})
+        this.setState({setToWrite});
+        this.setState({setToOperate:true});
         this.setState({currentNumber:tempScreen})
         
        }else{
