@@ -99,10 +99,10 @@ class App extends Component {
   }
   render(){
     return (
-      <div className="App">
+      <div >
         <div class="container">
-          <div class="row">
-            <div class="col">
+          <div class="row justify-content-center">
+            <div class="col-6">
               <Display
                   DisplayScreen={this.state.screen}
                   DisplayResult={this.state.currentNumber}
@@ -110,10 +110,9 @@ class App extends Component {
 
             </div>
           </div>
-          <div class="row">
-            
-              
-        
+          <div class="row justify-content-center">
+            <div class="col-6 justify-content-center">
+              <div class="row">
               <Key 
               Character={1}
               CharacterToScreen={this.displayScreen}
@@ -170,6 +169,14 @@ class App extends Component {
               Character={'/'}
               CharacterToScreen={this.displayScreen}
               />
+
+              </div>
+            
+
+            </div>
+              
+        
+              
 
             
 
