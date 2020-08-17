@@ -102,7 +102,7 @@ class App extends Component {
       <div >
         <div class="container">
           <div class="row justify-content-center">
-            <div class="col-6">
+            <div class="col-12 col-md-6">
               <Display
                   DisplayScreen={this.state.screen}
                   DisplayResult={this.state.currentNumber}
@@ -111,7 +111,7 @@ class App extends Component {
             </div>
           </div>
           <div class="row justify-content-center">
-            <div class="col-6 justify-content-center">
+            <div class="col-12 col-md-6 justify-content-center">
               <div class="row">
               <Key 
               Character={1}
