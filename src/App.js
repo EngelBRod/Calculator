@@ -28,49 +28,65 @@ class App extends Component {
      
       if( this.state.setToOperate){
         let currentOperator=this.state.currentOperation;
-        tempScreen=[...this.state.screen]
-        tempScreen= tempScreen.concat(this.state.currentNumber);
+        console.log('writing'+ currentOperator);
 
-
-        if(value !=='=' && value !=='CE' && value !=='C'){         
-          
-          tempScreen= tempScreen.concat( value);        
-
-        }       
-        
-        tempScreen=tempScreen.join('');
-        console.log('testing screen'+tempScreen)
-        this.setState({screen:tempScreen})
-        console.log('writing'+ value);
+       
 
         switch(currentOperator){
         
           case '+':
             tempResult=  this.state.result + parseInt(this.state.currentNumber)  ;
-            this.setState({setToOperate:false});
+            if(value!=='='){
+              this.setState({setToOperate:false});
+            }            
             break;
            // return tempResult;
           case '-':
             tempResult=  this.state.result - parseInt(this.state.currentNumber)  ;
-            this.setState({setToOperate:false});
+            if(value!=='='){
+              this.setState({setToOperate:false});
+            }   
             break;
           case '*':
             tempResult=  this.state.result * (this.state.currentNumber)  ;
-            this.setState({setToOperate:false});
+            if(value!=='='){
+              this.setState({setToOperate:false});
+            }   
             break;
           case '/':
             tempResult= this.state.result / parseInt(this.state.currentNumber);
-            this.setState({setToOperate:false});
+            if(value!=='='){
+              
+            }   
             break;
           case '=':
-            // tempResult= this.state.result / parseInt(this.state.currentNumber);
-            // this.setState({setToOperate:false});
+            tempResult=parseInt(this.state.currentNumber);
             break;
           default:
             tempResult=parseInt(this.state.currentNumber);
             break
             
         }
+       
+        if(currentOperator==='='){
+          tempScreen='';
+        }else{
+          tempScreen=[...this.state.screen]
+        }   
+        
+        tempScreen= tempScreen.concat(this.state.currentNumber);
+
+        if(value !=='=' && value !=='CE' && value !=='C'){         
+          
+          tempScreen= tempScreen.concat( value);        
+
+        }       
+        if(currentOperator!=='='){
+          tempScreen=tempScreen.join('');
+        }
+        
+        console.log('testing screen'+tempScreen)
+        this.setState({screen:tempScreen})
         
         console.log(tempResult+'temp')
         this.setState({result:tempResult})
@@ -80,9 +96,9 @@ class App extends Component {
         this.setState({setToWrite})
 
       }
-      if(value!=='='){
-        this.setState({currentOperation:value.toString()})
-      }
+      
+      this.setState({currentOperation:value})
+     
       
       
     
