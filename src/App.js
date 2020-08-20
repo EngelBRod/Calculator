@@ -24,17 +24,24 @@ class App extends Component {
     
    
 
-    if(value==='+' || value==='-' || value==='*' || value==='/'){
+    if(value==='+' || value==='-' || value==='*' || value==='/' || value==='='){
      
       if( this.state.setToOperate){
         let currentOperator=this.state.currentOperation;
-        tempScreen=[...this.state.currentNumber]
-        tempScreen= tempScreen.concat( value.toString());
-        tempScreen= tempScreen.concat(this.state.screen);
+        tempScreen=[...this.state.screen]
+        tempScreen= tempScreen.concat(this.state.currentNumber);
+
+
+        if(value !=='=' && value !=='CE' && value !=='C'){         
+          
+          tempScreen= tempScreen.concat( value);        
+
+        }       
+        
         tempScreen=tempScreen.join('');
-        console.log(tempScreen)
+        console.log('testing screen'+tempScreen)
         this.setState({screen:tempScreen})
-        console.log('set:'+this.state.setToOperate);
+        console.log('writing'+ value);
 
         switch(currentOperator){
         
@@ -55,6 +62,10 @@ class App extends Component {
             tempResult= this.state.result / parseInt(this.state.currentNumber);
             this.setState({setToOperate:false});
             break;
+          case '=':
+            // tempResult= this.state.result / parseInt(this.state.currentNumber);
+            // this.setState({setToOperate:false});
+            break;
           default:
             tempResult=parseInt(this.state.currentNumber);
             break
@@ -69,11 +80,30 @@ class App extends Component {
         this.setState({setToWrite})
 
       }
-      this.setState({currentOperation:value.toString()})
+      if(value!=='='){
+        this.setState({currentOperation:value.toString()})
+      }
+      
       
     
      
 
+    }else if(value==='C'){
+      this.setState({
+        currentNumber:'0',
+        setToWrite:true
+      });
+    }else if(value==='CE'){
+    
+      this.setState({
+        currentNumber:'0',
+        screen:'',
+        currentOperation:'',
+        result:0,
+        setToWrite:true,
+        setToOperate:true
+
+      })
     }
     else{
 
@@ -89,7 +119,8 @@ class App extends Component {
          tempScreen= tempScreen.concat( value.toString());
          tempScreen=tempScreen.join('');
          //console.log(tempScreen.join(''));
-         this.setState({currentNumber:tempScreen})
+         this.setState({currentNumber:tempScreen});
+         console.log('test writing');
          
        }
       
@@ -113,6 +144,19 @@ class App extends Component {
           <div class="row justify-content-center">
             <div class="col-12 col-md-6 justify-content-center">
               <div class="row">
+              
+              <Key 
+              Character={'C'}
+              CharacterToScreen={this.displayScreen}
+              /> 
+              <Key 
+              Character={'CE'}
+              CharacterToScreen={this.displayScreen}
+              />
+              <Key 
+              Character={'<-'}
+              CharacterToScreen={this.displayScreen}
+              /> 
               <Key 
               Character={1}
               CharacterToScreen={this.displayScreen}
@@ -149,20 +193,25 @@ class App extends Component {
               Character={9}
               CharacterToScreen={this.displayScreen}
               />
+               <Key 
+              Character={'+'}
+              CharacterToScreen={this.displayScreen}
+              />
               <Key 
               Character={0}
               CharacterToScreen={this.displayScreen}
               />
-              <Key 
-              Character={'+'}
-              CharacterToScreen={this.displayScreen}
-              />
+             
               <Key 
               Character={'-'}
               CharacterToScreen={this.displayScreen}
               />
               <Key 
               Character={'*'}
+              CharacterToScreen={this.displayScreen}
+              />
+              <Key 
+              Character={'='}
               CharacterToScreen={this.displayScreen}
               />
               <Key 
