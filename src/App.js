@@ -20,6 +20,7 @@ class App extends Component {
     let tempScreen
     let tempResult=0;
     let setToWrite=this.state.setToWrite;
+    let error= false;
 
     
    
@@ -48,15 +49,20 @@ class App extends Component {
             }   
             break;
           case '*':
-            tempResult=  this.state.result * (this.state.currentNumber)  ;
+            tempResult=  this.state.result * parseInt(this.state.currentNumber)  ;
             if(value!=='='){
               this.setState({setToOperate:false});
             }   
             break;
           case '/':
-            tempResult= this.state.result / parseInt(this.state.currentNumber);
+            if(parseInt(this.state.currentNumber)===0){
+              error=true;
+            }else{
+              tempResult= this.state.result / parseInt(this.state.currentNumber);
+            }
+            
             if(value!=='='){
-              
+              this.setState({setToOperate:false});
             }   
             break;
           case '=':
@@ -67,33 +73,48 @@ class App extends Component {
             break
             
         }
-       
-        if(currentOperator==='='){
-          tempScreen='';
+
+        if(error){
+          this.setState({
+            currentNumber:'0',
+            screen:'Cannot divide by zero',
+            currentOperation:'',
+            result:0,
+            setToWrite:true,
+            setToOperate:true    
+          })
         }else{
-          tempScreen=[...this.state.screen]
-        }   
-        
-        tempScreen= tempScreen.concat(this.state.currentNumber);
-
-        if(value !=='=' && value !=='CE' && value !=='C'){         
+          if(currentOperator==='='){
+            tempScreen='';
+          }else{
+            tempScreen=[...this.state.screen]
+          }   
           
-          tempScreen= tempScreen.concat( value);        
-
-        }       
-        if(currentOperator!=='='){
-          tempScreen=tempScreen.join('');
+          tempScreen= tempScreen.concat(this.state.currentNumber);
+  
+          if(value !=='=' && value !=='CE' && value !=='C'){         
+            
+            tempScreen= tempScreen.concat( value);        
+  
+          }       
+          if(currentOperator!=='='){
+            tempScreen=tempScreen.join('');
+          }
+          
+          console.log('testing screen'+tempScreen)
+          this.setState({screen:tempScreen})
+          
+          console.log(tempResult+'temp')
+          this.setState({result:tempResult})
+          tempResult=tempResult.toString()
+          this.setState({currentNumber:tempResult});
+          setToWrite=true;
+          this.setState({setToWrite})
         }
+
         
-        console.log('testing screen'+tempScreen)
-        this.setState({screen:tempScreen})
+       
         
-        console.log(tempResult+'temp')
-        this.setState({result:tempResult})
-        tempResult=tempResult.toString()
-        this.setState({currentNumber:tempResult});
-        setToWrite=true;
-        this.setState({setToWrite})
 
       }
       
